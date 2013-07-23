@@ -31,7 +31,7 @@ public class Combinatorics {
 			seqs.add(yesInc);
 		} else {
 			_slowSequences(seqs, noInc, index, value);
-			_slowSequences(seqs, yesInc, index, value);
+			_slowSequences(seqs, yesInc, index, value + 1);
 		}
 	}
 
