@@ -15,8 +15,7 @@ public class Combinatorics {
 		return seqs;
 	}
 
-	private static void _slowSequences(List<int[]> seqs, int[] s, int index,
-			int value) {
+	private static void _slowSequences(List<int[]> seqs, int[] s, int index, int value) {
 		final int[] noInc = new int[s.length];
 		final int[] yesInc = new int[s.length];
 
@@ -39,22 +38,18 @@ public class Combinatorics {
 		return permutations(list, k, true);
 	}
 
-	public static Collection<String> permutations(char[] list, int k,
-			boolean avoidRepeats) {
+	public static Collection<String> permutations(char[] list, int k, boolean avoidRepeats) {
 		if (list.length > 64) {
-			System.err
-					.println("Cannot handle permutations on more than 64 characters.");
+			System.err.println("Cannot handle permutations on more than 64 characters.");
 			return null;
 		} else {
-			final Collection<String> a = avoidRepeats ? new LinkedHashSet<String>()
-					: new LinkedList<String>();
+			final Collection<String> a = avoidRepeats ? new LinkedHashSet<String>() : new LinkedList<String>();
 			permutations(list, k, a, "", 0);
 			return a;
 		}
 	}
 
-	protected static void permutations(char[] list, int k,
-			Collection<String> a, String s, long flags) {
+	protected static void permutations(char[] list, int k, Collection<String> a, String s, long flags) {
 		if (k <= 0) {
 			a.add(s);
 		} else {
@@ -72,8 +67,7 @@ public class Combinatorics {
 		return a;
 	}
 
-	protected static void combos(char[] set, int k, List<String> a, String s,
-			int index) {
+	protected static void combos(char[] set, int k, List<String> a, String s, int index) {
 		if (k <= 0) {
 			a.add(s);
 		} else {
@@ -100,8 +94,7 @@ public class Combinatorics {
 		return a;
 	}
 
-	protected static void sigmaStar(char[] sigma, int length, List<String> a,
-			String s) {
+	protected static void sigmaStar(char[] sigma, int length, List<String> a, String s) {
 		if (s.length() == length) {
 			a.add(s);
 		} else {
@@ -218,12 +211,11 @@ public class Combinatorics {
 	 *            <code>DONT_THROW_EXCEPTION</code>
 	 * @return The last index computed
 	 */
-	public static int computeSeq(int[] R, int a, int b, int c, int d, int n,
-			int flags) throws ArrayIndexOutOfBoundsException {
+	public static int computeSeq(int[] R, int a, int b, int c, int d, int n, int flags)
+			throws ArrayIndexOutOfBoundsException {
 		if ((flags & COMPUTE_ONLY_IF_SLOW) > 0) {
 			try {
-				for (int limit = R.length - 1; n <= limit
-						&& (R[n - 1] - R[n - 2] | 1) == 1; n++) {
+				for (int limit = R.length - 1; n <= limit && (R[n - 1] - R[n - 2] | 1) == 1; n++) {
 					R[n] = R[n - a - R[n - b]] + R[n - c - R[n - d]];
 				}
 				return n - 1;
@@ -260,20 +252,18 @@ public class Combinatorics {
 		return computeSeq(C, s, 1, s - 2, 3, n, flags);
 	}
 
-	public static int computeConway(int[] A, int a, int b, int k, int n,
-			boolean onlyIfSlow) throws ArrayIndexOutOfBoundsException {
+	public static int computeConway(int[] A, int a, int b, int k, int n, boolean onlyIfSlow)
+			throws ArrayIndexOutOfBoundsException {
 		final int limit = A.length - 1;
 		if (onlyIfSlow) {
 			for (; n <= limit && (A[n - 1] - A[n - 2] | 1) == 1; n++) {
-				A[n] = A[n - a - arrayComp(A, k, n - b)]
-						+ arrayComp(A, k + 1, n - b);
+				A[n] = A[n - a - arrayComp(A, k, n - b)] + arrayComp(A, k + 1, n - b);
 			}
 			return n - 1;
 		}
 
 		for (; n <= limit; n++) {
-			A[n] = A[n - a - arrayComp(A, k, n - b)]
-					+ arrayComp(A, k + 1, n - b);
+			A[n] = A[n - a - arrayComp(A, k, n - b)] + arrayComp(A, k + 1, n - b);
 		}
 		return n - 1;
 	}

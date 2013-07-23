@@ -21,8 +21,7 @@ public class VSeqExt {
 	 *            are output
 	 * @return <code>true</code> if and only if none of the lemmas are violated
 	 */
-	public static boolean checkLemmas(int[] V, int s, int j, int[] F,
-			int firstNonIC, PrintStream ps) {
+	public static boolean checkLemmas(int[] V, int s, int j, int[] F, int firstNonIC, PrintStream ps) {
 		boolean rv = true;
 
 		if (V[V.length - 1] > 0 && F != null) {
@@ -31,13 +30,12 @@ public class VSeqExt {
 				final int mother = V[n - s - V[n - j]];
 				final int father = V[n - s - V[n - (j << 2)]];
 
-				if ((V[n] % 2 == 0 && !(F[a] > 1 && mother == a && father == a || F[a] == 1
-						&& mother == a - 1 && father == a + 1))
+				if ((V[n] % 2 == 0 && !(F[a] > 1 && mother == a && father == a || F[a] == 1 && mother == a - 1
+						&& father == a + 1))
 						|| (V[n] % 2 == 1 && !(mother == a && father == a + 1))) {
 					// Lemmas 7 and 8
-					ps.printf(
-							"%d -> %d ; a = %d ; F(a) = %d ; m = %d ; f = %d // Lemma 7/8%n",
-							n, V[n], a, F[a], mother, father);
+					ps.printf("%d -> %d ; a = %d ; F(a) = %d ; m = %d ; f = %d // Lemma 7/8%n", n, V[n], a, F[a],
+							mother, father);
 					rv = false;
 				}
 			}
@@ -53,9 +51,7 @@ public class VSeqExt {
 			// Lemma 10
 			for (int a = V[1] + 1, bound = F.length - 2; a < bound; a++) {
 				if (F[a] == 1 && !(F[a + 2] > 1 && F[a - 1] == 2)) {
-					ps.printf(
-							"a = %d ; F(a) = 1 ; F(a+2) = %d ; F(a-1) = %d // Lemma 10%n",
-							a, F[a + 2], F[a - 1]);
+					ps.printf("a = %d ; F(a) = 1 ; F(a+2) = %d ; F(a-1) = %d // Lemma 10%n", a, F[a + 2], F[a - 1]);
 					rv = false;
 				}
 			}
@@ -63,20 +59,15 @@ public class VSeqExt {
 			// Lemma 11
 			for (int a = V[1], bound = F.length - 2; a < bound; a++) {
 				if (F[a] == 1 && F[a + 1] == 2 && F[a + 2] != 2) {
-					ps.printf(
-							"a = %d ; F(a) = 1 ; F(a+1) = 2 ; F(a+2) = %d // Lemma 11%n",
-							a, F[a + 2]);
+					ps.printf("a = %d ; F(a) = 1 ; F(a+1) = 2 ; F(a+2) = %d // Lemma 11%n", a, F[a + 2]);
 					rv = false;
 				}
 			}
 
 			// Lemma 12(i)
 			for (int a = V[1], bound = F.length - 3; a < bound; a++) {
-				if (F[a] == 2 && F[a + 1] == 2 && F[a + 2] == 2
-						&& F[a + 3] == 2) {
-					ps.printf(
-							"a = %d ; F(a) = F(a+1) = F(a+2) = F(a+3) = 2 // Lemma 12(i)%n",
-							a);
+				if (F[a] == 2 && F[a + 1] == 2 && F[a + 2] == 2 && F[a + 3] == 2) {
+					ps.printf("a = %d ; F(a) = F(a+1) = F(a+2) = F(a+3) = 2 // Lemma 12(i)%n", a);
 					rv = false;
 				}
 			}
@@ -84,9 +75,7 @@ public class VSeqExt {
 			// Lemma 12(ii)
 			for (int a = V[1] + 2, bound = F.length; a < bound; a++) {
 				if (F[a - 1] == 3 && F[a - 2] == 3 && F[a] != 2) {
-					ps.printf(
-							"a = %d ; F(a-2) = F(a-1) = 3 ; F(a) = %d // Lemma 12(ii)%n",
-							a, F[a]);
+					ps.printf("a = %d ; F(a-2) = F(a-1) = 3 ; F(a) = %d // Lemma 12(ii)%n", a, F[a]);
 					rv = false;
 				}
 			}
@@ -94,9 +83,7 @@ public class VSeqExt {
 			// Lemma 13
 			for (int a = V[1], bound = (F.length - 1) / 2; a < bound; a++) {
 				if (F[a] == 1 && !(F[2 * a] == 2 && F[2 * a + 1] == 2)) {
-					ps.printf(
-							"a = %d ; F(a) = 1 ; F(2a) = %d ; F(2a+1) = %d // Lemma 13%n",
-							a, F[2 * a], F[2 * a + 1]);
+					ps.printf("a = %d ; F(a) = 1 ; F(2a) = %d ; F(2a+1) = %d // Lemma 13%n", a, F[2 * a], F[2 * a + 1]);
 					rv = false;
 				}
 			}
@@ -104,30 +91,24 @@ public class VSeqExt {
 			// Lemma 14
 			for (int a = V[1], bound = (F.length - 1) / 2; a < bound; a++) {
 				if (F[a] == 3 && !(F[2 * a] == 3 && F[2 * a + 1] == 2)) {
-					ps.printf(
-							"a = %d ; F(a) = 3 ; F(2a) = %d ; F(2a+1) = %d // Lemma 14%n",
-							a, F[2 * a], F[2 * a + 1]);
+					ps.printf("a = %d ; F(a) = 3 ; F(2a) = %d ; F(2a+1) = %d // Lemma 14%n", a, F[2 * a], F[2 * a + 1]);
 					rv = false;
 				}
 			}
 
 			// Lemma 15
 			for (int a = V[1] + 1, bound = (F.length - 1) / 2; a < bound; a++) {
-				if (F[a - 1] == 1 && F[a] == 2
-						&& !(F[2 * a] == 1 && F[2 * a + 1] == 3)) {
-					ps.printf(
-							"a = %d ; F(a-1) = 1 ; F(a) = 2 ; F(2a) = %d ; F(2a+1) = %d // Lemma 15%n",
-							a, F[2 * a], F[2 * a + 1]);
+				if (F[a - 1] == 1 && F[a] == 2 && !(F[2 * a] == 1 && F[2 * a + 1] == 3)) {
+					ps.printf("a = %d ; F(a-1) = 1 ; F(a) = 2 ; F(2a) = %d ; F(2a+1) = %d // Lemma 15%n", a, F[2 * a],
+							F[2 * a + 1]);
 					rv = false;
 				}
 			}
 
 			// Lemma 16
 			for (int a = V[1] + 1, bound = (F.length - 1) / 2; a < bound; a++) {
-				if (F[a - 1] == 3 && F[a] == 2 && F[a + 1] == 3
-						&& !(F[2 * a] == 1 && F[2 * a + 1] == 3)) {
-					ps.printf(
-							"a = %d ; F(a-1) = 3 ; F(a) = 2 ; F(a+1) = 3 ; F(2a) = %d ; F(2a+1) = %d // Lemma 16%n",
+				if (F[a - 1] == 3 && F[a] == 2 && F[a + 1] == 3 && !(F[2 * a] == 1 && F[2 * a + 1] == 3)) {
+					ps.printf("a = %d ; F(a-1) = 3 ; F(a) = 2 ; F(a+1) = 3 ; F(2a) = %d ; F(2a+1) = %d // Lemma 16%n",
 							a, F[2 * a], F[2 * a + 1]);
 					rv = false;
 				}
@@ -135,10 +116,8 @@ public class VSeqExt {
 
 			// Lemma 17
 			for (int a = V[1] + 1, bound = (F.length - 1) / 2; a < bound; a++) {
-				if (F[a - 1] == 3 && F[a] == 2 && F[a + 1] == 1
-						&& !(F[2 * a] == 1 && F[2 * a + 1] == 2)) {
-					ps.printf(
-							"a = %d ; F(a-1) = 3 ; F(a) = 2 ; F(a+1) = 1 ; F(2a) = %d ; F(2a+1) = %d // Lemma 17%n",
+				if (F[a - 1] == 3 && F[a] == 2 && F[a + 1] == 1 && !(F[2 * a] == 1 && F[2 * a + 1] == 2)) {
+					ps.printf("a = %d ; F(a-1) = 3 ; F(a) = 2 ; F(a+1) = 1 ; F(2a) = %d ; F(2a+1) = %d // Lemma 17%n",
 							a, F[2 * a], F[2 * a + 1]);
 					rv = false;
 				}
@@ -148,16 +127,12 @@ public class VSeqExt {
 			for (int a = V[1] + 2, bound = (F.length - 1) / 2; a < bound; a++) {
 				if (F[a - 2] != 2 && F[a - 1] == 2 && F[a] == 2) {
 					if (F[2 * a] != 2) {
-						ps.printf(
-								"a = %d ; F(a-2) = %d ; F(a-1) = F(a) = 2 ; F(2a) = %d // Lemma 18%n",
-								a, F[a - 2], F[2 * a]);
+						ps.printf("a = %d ; F(a-2) = %d ; F(a-1) = F(a) = 2 ; F(2a) = %d // Lemma 18%n", a, F[a - 2],
+								F[2 * a]);
 						rv = false;
 					}
-					if (F[a + 1] == 1 && F[2 * a + 1] != 1 || F[a + 1] != 1
-							&& F[2 * a + 1] != 2) {
-						ps.printf(
-								"a = %d ; F(a+1) = %d ; F(2a+1) = %d // Lemma 18%n",
-								a, F[a + 1], F[2 * a + 1]);
+					if (F[a + 1] == 1 && F[2 * a + 1] != 1 || F[a + 1] != 1 && F[2 * a + 1] != 2) {
+						ps.printf("a = %d ; F(a+1) = %d ; F(2a+1) = %d // Lemma 18%n", a, F[a + 1], F[2 * a + 1]);
 						rv = false;
 					}
 				}
@@ -167,16 +142,11 @@ public class VSeqExt {
 			for (int a = V[1] + 2, bound = (F.length - 1) / 2; a < bound; a++) {
 				if (F[a - 2] == 2 && F[a - 1] == 2 && F[a] == 2) {
 					if (F[2 * a] != 1) {
-						ps.printf(
-								"a = %d ; F(a-2) = F(a-1) = F(a) = 2 ; F(2a) = %d // Lemma 19%n",
-								a, F[2 * a]);
+						ps.printf("a = %d ; F(a-2) = F(a-1) = F(a) = 2 ; F(2a) = %d // Lemma 19%n", a, F[2 * a]);
 						rv = false;
 					}
-					if (F[a + 1] == 1 && F[2 * a + 1] != 2 || F[a + 1] == 3
-							&& F[2 * a + 1] != 3) {
-						ps.printf(
-								"a = %d ; F(a+1) = %d ; F(2a+1) = %d // Lemma 19%n",
-								a, F[a + 1], F[2 * a + 1]);
+					if (F[a + 1] == 1 && F[2 * a + 1] != 2 || F[a + 1] == 3 && F[2 * a + 1] != 3) {
+						ps.printf("a = %d ; F(a+1) = %d ; F(2a+1) = %d // Lemma 19%n", a, F[a + 1], F[2 * a + 1]);
 						rv = false;
 					}
 				}
@@ -202,8 +172,7 @@ public class VSeqExt {
 	 *            <code>Combinatorics.DONT_THROW_EXCEPTION</code>
 	 * @return The last index computed
 	 */
-	public static int computeSeq(int[] V, int s, int j, int n, int flags)
-			throws ArrayIndexOutOfBoundsException {
+	public static int computeSeq(int[] V, int s, int j, int n, int flags) throws ArrayIndexOutOfBoundsException {
 		return Combinatorics.computeSeq(V, s, j, s, j << 2, n, flags);
 	}
 
