@@ -207,16 +207,6 @@ public class VSeqExt {
 		return Combinatorics.computeSeq(V, s, j, s, j << 2, n, flags);
 	}
 
-	public static boolean isSlow(int[] V, int start, PrintStream ps) {
-		for (int n = start + 1, current = V[start], bound = V.length; n < bound; current = V[n], n++) {
-			if (current != V[n] && current + 1 != V[n]) {
-				ps.printf("No longer slow at %d%n", n);
-				return false;
-			}
-		}
-		return true;
-	}
-
 	/**
 	 * Returns one of possibly many sets of ICs such that V_{s,j} is slow.
 	 *

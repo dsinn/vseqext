@@ -185,15 +185,16 @@ public class Combinatorics {
 	 *
 	 * @param A
 	 *            A 1-indexed sequence
-	 * @return <code>true</code> if and only if the sequence is slow
+	 * @return The first index at which the sequence does not increase by 0 or 1
+	 *         from the previous if not slow; -1 otherwise.
 	 */
-	public static boolean isSlow(int[] A) {
+	public static int isSlow(int[] A) {
 		for (int n = 2, current = A[1], bound = A.length; n < bound; current = A[n], n++) {
 			if ((A[n] - current | 1) != 1) {
-				return false;
+				return n;
 			}
 		}
-		return true;
+		return -1;
 	}
 
 	/**
