@@ -7,6 +7,13 @@ import java.util.List;
 public class Combinatorics {
 	final public static int COMPUTE_ONLY_IF_SLOW = 1, DONT_THROW_EXCEPTION = 2;
 
+	/**
+	 * Returns all slow sequences of the given length that start with 1.
+	 *
+	 * @param length
+	 *            The length of each slow sequence
+	 * @return A list of slow sequences
+	 */
 	public static List<int[]> slowSequences(int length) {
 		final List<int[]> seqs = new ArrayList<int[]>();
 		final int[] s = new int[length];
@@ -34,10 +41,18 @@ public class Combinatorics {
 		}
 	}
 
-	public static Collection<String> permutations(char[] list, int k) {
-		return permutations(list, k, true);
-	}
-
+	/**
+	 * Returns all permutations of the given length from the given array.
+	 *
+	 * @param list
+	 *            A list of characters
+	 * @param k
+	 *            The length of each permutation
+	 * @param avoidRepeats
+	 *            <code>true</code> if the result must not contain duplicates;
+	 *            only needed if the array contains duplicates.
+	 * @return A <code>Collection</code> of permutation strings
+	 */
 	public static Collection<String> permutations(char[] list, int k, boolean avoidRepeats) {
 		if (list.length > 64) {
 			System.err.println("Cannot handle permutations on more than 64 characters.");
@@ -61,6 +76,15 @@ public class Combinatorics {
 		}
 	}
 
+	/**
+	 * Returns all combinations of the given length from the given array.
+	 *
+	 * @param set
+	 *            A list of characters that does not contain duplicates
+	 * @param k
+	 *            The length of each combination
+	 * @return A <code>List</code> of combination strings
+	 */
 	public static List<String> combos(char[] set, int k) {
 		final List<String> a = new LinkedList<String>();
 		combos(set, k, a, "", 0);
@@ -179,7 +203,7 @@ public class Combinatorics {
 	 * @param A
 	 *            A 1-indexed sequence
 	 * @return The first index at which the sequence does not increase by 0 or 1
-	 *         from the previous if not slow; -1 otherwise.
+	 *         from the previous if not slow; -1 otherwise
 	 */
 	public static int isSlow(int[] A) {
 		for (int n = 2, current = A[1], bound = A.length; n < bound; current = A[n], n++) {
@@ -252,6 +276,26 @@ public class Combinatorics {
 		return computeSeq(C, s, 1, s - 2, 3, n, flags);
 	}
 
+	/**
+	 * Computes a Conway sequence.
+	 *
+	 * @param A
+	 *            An array with its initial conditions already assigned
+	 * @param a
+	 *            The <code>a</code> parameter
+	 * @param b
+	 *            The <code>b</code> parameter
+	 * @param k
+	 *            The <code>k</code> parameter
+	 * @param n
+	 *            The <code>n</code> parameter
+	 * @param onlyIfSlow
+	 *            <code>true</code> if execution should stop as soon as a
+	 *            non-slow term is computed
+	 * @return
+	 * @throws ArrayIndexOutOfBoundsException
+	 *             If a term cannot be computed
+	 */
 	public static int computeConway(int[] A, int a, int b, int k, int n, boolean onlyIfSlow)
 			throws ArrayIndexOutOfBoundsException {
 		final int limit = A.length - 1;
