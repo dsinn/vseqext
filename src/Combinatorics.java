@@ -84,26 +84,36 @@ public class Combinatorics {
 		}
 	}
 
-	public static List<String> language(char[] sigma, int length) {
+	/**
+	 * Returns a <code>List</code> of all strings of the given length that
+	 * belong to the given alphabet.
+	 *
+	 * @param sigma
+	 *            An alphabet
+	 * @param length
+	 *            The length of the strings
+	 * @return A <code>List</code> of strings
+	 */
+	public static List<String> sigmaStar(char[] sigma, int length) {
 		final List<String> a = new LinkedList<String>();
-		language(sigma, length, a, "");
+		sigmaStar(sigma, length, a, "");
 		return a;
 	}
 
-	protected static void language(char[] sigma, int length, List<String> a,
+	protected static void sigmaStar(char[] sigma, int length, List<String> a,
 			String s) {
 		if (s.length() == length) {
 			a.add(s);
 		} else {
 			for (int i = 0; i < sigma.length; i++) {
-				language(sigma, length, a, s + sigma[i]);
+				sigmaStar(sigma, length, a, s + sigma[i]);
 			}
 		}
 	}
 
 	/**
 	 * Calculates n! or n factorial.
-	 * 
+	 *
 	 * @param n
 	 *            a natural number
 	 * @return n! if n is a natural number, -1 if n is negative
@@ -123,19 +133,31 @@ public class Combinatorics {
 		return product;
 	}
 
+	/**
+	 * Returns <code>n</code> perm <code>r</code>.
+	 */
 	public static long nPr(int n, int r) {
 		return factorial(n) / factorial(n - r);
 	}
 
+	/**
+	 * Returns <code>n</code> choose <code>r</code>.
+	 */
 	public static long nCr(int n, int r) {
 		return factorial(n) / factorial(r) / factorial(n - r);
 	}
 
 	/**
 	 * Returns the frequency sequence of a non-negative sequence.
-	 * 
+	 *
 	 * @param A
-	 * @return
+	 *            An array of non-negative integers.
+	 * @param start
+	 *            The index at which the counting starts (inclusive).
+	 * @param end
+	 *            The index at which the counting ends (exclusive).
+	 * @return An array <code>F</code> where <code>F[i]</code> is the number of
+	 *         times that <code>i</code> appears in the input array.
 	 */
 	public static int[] getFreqSeq(int[] A, int start, int end) {
 		int max = 0;
@@ -157,6 +179,14 @@ public class Combinatorics {
 		return F;
 	}
 
+	/**
+	 * Checks if the given sequence is slow, ignoring the difference between
+	 * <code>A[0]</code> and <code>A[1]</code>.
+	 *
+	 * @param A
+	 *            A 1-indexed sequence
+	 * @return <code>true</code> if and only if the sequence is slow
+	 */
 	public static boolean isSlow(int[] A) {
 		for (int n = 2, current = A[1], bound = A.length; n < bound; current = A[n], n++) {
 			if ((A[n] - current | 1) != 1) {
@@ -168,7 +198,7 @@ public class Combinatorics {
 
 	/**
 	 * Computes a <a, b, c, d> sequence, starting with the n'th term.
-	 * 
+	 *
 	 * @param R
 	 *            An array with its initial conditions already assigned
 	 * @param a
@@ -183,7 +213,8 @@ public class Combinatorics {
 	 *            The index at which the computation starts, i.e. the smallest
 	 *            non-IC index
 	 * @param flags
-	 *            COMPUTE_ONLY_IF_SLOW, DONT_THROW_EXCEPTION
+	 *            <code>COMPUTE_ONLY_IF_SLOW</code>,
+	 *            <code>DONT_THROW_EXCEPTION</code>
 	 * @return The last index computed
 	 */
 	public static int computeSeq(int[] R, int a, int b, int c, int d, int n,
@@ -211,7 +242,7 @@ public class Combinatorics {
 
 	/**
 	 * Computes a Conolly sequence.
-	 * 
+	 *
 	 * @param C
 	 *            An array with its initial conditions already assigned
 	 * @param s
@@ -248,7 +279,7 @@ public class Combinatorics {
 
 	/**
 	 * Computes A^k(n).
-	 * 
+	 *
 	 * @param R
 	 *            The sequence
 	 * @param k

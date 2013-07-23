@@ -1,6 +1,26 @@
 import java.io.PrintStream;
 
 public class VSeqExt {
+	/**
+	 * Checks if the V sequence lemmas hold for the given V_{s,j} sequence and
+	 * its corresponding frequency sequence.
+	 *
+	 * @param V
+	 *            An array with its initial conditions assigned.
+	 * @param s
+	 *            The s parameter
+	 * @param j
+	 *            The j parameter
+	 * @param F
+	 *            The frequency sequence of V
+	 * @param firstNonIC
+	 *            The index of the first term of V that is not part of the
+	 *            initial conditions
+	 * @param ps
+	 *            A <code>PrintStream</code> to which violations of the lemmas
+	 *            are output
+	 * @return <code>true</code> if and only if none of the lemmas are violated
+	 */
 	public static boolean checkLemmas(int[] V, int s, int j, int[] F,
 			int firstNonIC, PrintStream ps) {
 		boolean rv = true;
@@ -36,6 +56,7 @@ public class VSeqExt {
 					ps.printf(
 							"a = %d ; F(a) = 1 ; F(a+2) = %d ; F(a-1) = %d // Lemma 10%n",
 							a, F[a + 2], F[a - 1]);
+					rv = false;
 				}
 			}
 
@@ -149,6 +170,7 @@ public class VSeqExt {
 						ps.printf(
 								"a = %d ; F(a-2) = F(a-1) = F(a) = 2 ; F(2a) = %d // Lemma 19%n",
 								a, F[2 * a]);
+						rv = false;
 					}
 					if (F[a + 1] == 1 && F[2 * a + 1] != 2 || F[a + 1] == 3
 							&& F[2 * a + 1] != 3) {
@@ -165,7 +187,7 @@ public class VSeqExt {
 
 	/**
 	 * Computes the V_{s,j} sequence, starting with V_{s,j}(n).
-	 * 
+	 *
 	 * @param V
 	 *            An array with its initial conditions already assigned
 	 * @param s
@@ -176,8 +198,8 @@ public class VSeqExt {
 	 *            The index at which the computation starts, i.e. the smallest
 	 *            non-IC index
 	 * @param flags
-	 *            Sum of Combinatorics.COMPUTE_ONLY_IF_SLOW and
-	 *            Combinatorics.DONT_THROW_EXCEPTION
+	 *            Sum of <code>Combinatorics.COMPUTE_ONLY_IF_SLOW</code> and
+	 *            <code>Combinatorics.DONT_THROW_EXCEPTION</code>
 	 * @return The last index computed
 	 */
 	public static int computeSeq(int[] V, int s, int j, int n, int flags)
@@ -197,10 +219,10 @@ public class VSeqExt {
 
 	/**
 	 * Returns one of possibly many sets of ICs such that V_{s,j} is slow.
-	 * 
+	 *
 	 * @param V
 	 *            A set of ICs such that V_{s,j} is slow, 0-indexed.
-	 * @return
+	 * @return An array of initial conditions
 	 */
 	public static int[] getICs(int s, int j, int[] V) {
 		if (s % j != 0 || s < 0 || j < 1) {
@@ -273,13 +295,13 @@ public class VSeqExt {
 	}
 
 	/**
-	 * Returns the smallest number of ICs necessary for V_{s, j} to be slow and
+	 * Returns the smallest number of ICs necessary for V_{s,j} to be slow and
 	 * well-defined.
-	 * 
+	 *
 	 * @param s
-	 *            The s in V_{s, j}.
+	 *            The s in V_{s,j}.
 	 * @param j
-	 *            The j in V_{s, j}.
+	 *            The j in V_{s,j}.
 	 * @return The smallest number of ICs for a slow and well-defined solution
 	 *         of V.
 	 */
@@ -298,9 +320,9 @@ public class VSeqExt {
 
 	/**
 	 * Returns psi_j(x) as defined by Bram Isgur.
-	 * 
+	 *
 	 * @param j
-	 *            The j in V_{s, j}.
+	 *            The j in V_{s,j}.
 	 * @param x
 	 *            a slow integer sequence with x(0) = 1 or x(1) = 1
 	 * @return psi_j(x)
