@@ -262,7 +262,7 @@ public class VSeqExt {
 	 * @param j
 	 *            The j in V_{s,j}.
 	 * @return The smallest number of ICs for a slow and well-defined solution
-	 *         of V.
+	 *         of V if they exist; -1 otherwise.
 	 */
 	public static int getMinICsLength(int s, int j) {
 		if (s % j > 0) {
