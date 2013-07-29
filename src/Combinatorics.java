@@ -154,14 +154,25 @@ public class Combinatorics {
 	 * Returns <code>n</code> perm <code>r</code>.
 	 */
 	public static long nPr(int n, int r) {
-		return factorial(n) / factorial(n - r);
+		long product = 1;
+		for (int i = n - r + 1; i <= n; i++) {
+			product *= i;
+		}
+		return product;
 	}
 
 	/**
 	 * Returns <code>n</code> choose <code>r</code>.
 	 */
 	public static long nCr(int n, int r) {
-		return factorial(n) / factorial(r) / factorial(n - r);
+		r = Math.min(r, n - r);
+
+		long numerator = 1;
+		for (int i = n - r + 1; i <= n; i++) {
+			numerator *= i;
+		}
+
+		return numerator / factorial(r);
 	}
 
 	/**
