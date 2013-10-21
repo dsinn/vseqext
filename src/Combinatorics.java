@@ -57,11 +57,11 @@ public class Combinatorics {
 		if (list.length > 64) {
 			System.err.println("Cannot handle permutations on more than 64 characters.");
 			return null;
-		} else {
-			final Collection<String> a = avoidRepeats ? new LinkedHashSet<String>() : new LinkedList<String>();
-			permutations(list, k, a, "", 0);
-			return a;
 		}
+
+		final Collection<String> a = avoidRepeats ? new LinkedHashSet<String>() : new LinkedList<String>();
+		permutations(list, k, a, "", 0);
+		return a;
 	}
 
 	protected static void permutations(char[] list, int k, Collection<String> a, String s, long flags) {
