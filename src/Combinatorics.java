@@ -151,7 +151,7 @@ public class Combinatorics {
 	}
 
 	/**
-	 * Returns <code>n</code> perm <code>r</code>.
+	 * Returns <code>n</code> perm <code>r</code> for n >= r.
 	 */
 	public static long nPr(int n, int r) {
 		long product = 1;
@@ -162,7 +162,7 @@ public class Combinatorics {
 	}
 
 	/**
-	 * Returns <code>n</code> choose <code>r</code>.
+	 * Returns <code>n</code> choose <code>r</code> for n >= r.
 	 */
 	public static long nCr(int n, int r) {
 		r = Math.min(r, n - r);
